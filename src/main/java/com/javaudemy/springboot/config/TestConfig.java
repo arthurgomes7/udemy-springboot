@@ -1,8 +1,10 @@
 package com.javaudemy.springboot.config;
 
+import com.javaudemy.springboot.entities.Category;
 import com.javaudemy.springboot.entities.Order;
 import com.javaudemy.springboot.entities.User;
 import com.javaudemy.springboot.entities.enums.OrderStatus;
+import com.javaudemy.springboot.repository.CategoryRepository;
 import com.javaudemy.springboot.repository.OrderRepository;
 import com.javaudemy.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,18 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); // Null no ID pois o DB auto incrementa.
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 
